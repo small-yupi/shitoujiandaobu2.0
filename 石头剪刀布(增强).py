@@ -66,7 +66,7 @@ while 1:
         s.exit(0)
     # 防止程序报错 "ValueError"
     try:
-        wait_time = float(input("在开始游戏之前, 请输入AI出拳的速度(出拳速度跟实力无关)。\n"))
+        wait_time = float(input("在开始游戏之前, 请输入电脑出拳的速度(出拳速度跟实力无关)。\n"))
     # 引发错误 "ValueError" 后提示
     except ValueError:
         print("请不要输入错误数据, 谢谢!")
@@ -78,14 +78,13 @@ while 1:
         elif wait_time <= 0:
             print("数字过小!")
             input_error_number_of_times_1 += 1
-        else:
+        elif wait_time > 2:
             print("数字过大, 为了您的体验, 请将数字调小。")
             input_error_number_of_times_1 += 1
 # 开始石头剪刀布
 while 1:
     # 10次为一个周期
     for i in range(10):
-        print("请输入(0=石头,1=剪刀,2=布)。")
         # 选择选项
         while 1:
             # 设定多次输入错误数据的结果
@@ -102,16 +101,16 @@ while 1:
                 s.exit(0)
             # 防止出现错误 "ValueError"
             try:
-                type_in = int(input())
+                type_in = int(input("请输入(0=石头,1=剪刀,2=布)。\n"))
             # 引发错误 "ValueError" 后提示
             except ValueError:
                 print("请勿输入错误数据, 谢谢!")
                 input_error_number_of_times_2 += 1
             # 判断数字是否在正常范围内
             else:
-                if 0 == type_in < 3:
+                if type_in == 0 or type_in == 1 or type_in == 2:
                     break
-                elif type_in < 0 or type_in > 2:
+                elif type_in < 0 or type_in > 3:
                     print("不存在此选项")
                     input_error_number_of_times_2 += 1
         print("请等待电脑...")
