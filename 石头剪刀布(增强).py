@@ -1,4 +1,4 @@
-# 石头剪刀布5.0版(1.0版使用java进行制作)
+# 石头剪刀布6.0版(1.0版使用java进行制作)
 # 模块导入
 import random as r
 import time as t
@@ -47,7 +47,7 @@ popping_character("头")
 popping_character("剪")
 popping_character("刀")
 popping_character("布")
-print("4.0", end="")
+print("6.0", end="")
 t.sleep(0.3)
 print("版")
 # 开场设置
