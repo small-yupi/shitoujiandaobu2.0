@@ -208,11 +208,11 @@ while 1:
     print(f"你赢了{all_human_result}局")
     print(f"平了{draw}局")
     # 判断双方胜率高低
-    if computer_result > human_result:
+    if all_computer_result > all_human_result:
         print("电脑胜率比你高。\n")
-    elif computer_result < human_result:
+    elif all_computer_result < all_human_result:
         print("你比电脑胜率高。\n")
-    elif computer_result < human_result:
+    elif all_computer_result < all_human_result:
         print("你和电脑不相上下。\n")
     # 变量初始化
     computer_result = 0
