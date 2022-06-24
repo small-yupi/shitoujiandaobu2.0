@@ -26,8 +26,13 @@ type_in = 0
 computer = [0, 1, 2, 2, 1, 0]
 # 电脑出拳等待时间变量:
 wait_time = 0
+# 记录当前时间变量:
+now_time = 0
+# 记录运行时间变量(创建并记录时间):
+start_time = t.time()
+now_run_time = 0
 # 等待
-t.sleep(0.5)
+t.sleep(1)
 # 定义函数
 # 开场动画函数:
 
@@ -50,6 +55,7 @@ popping_character("布")
 print("6.0", end="")
 t.sleep(0.3)
 print("版")
+t.sleep(0.6)
 # 开场设置
 while 1:
     # 设定多次输入错误数据的结果
@@ -66,6 +72,7 @@ while 1:
         s.exit(0)
     # 防止程序报错 "ValueError"
     try:
+        # 用户设置电脑出拳时间
         wait_time = float(input("在开始游戏之前, 请输入电脑出拳的速度(出拳速度跟实力无关)。\n"))
     # 引发错误 "ValueError" 后提示
     except ValueError:
@@ -110,7 +117,7 @@ while 1:
             else:
                 if type_in == 0 or type_in == 1 or type_in == 2:
                     break
-                elif type_in < 0 or type_in > 3:
+                elif type_in < 0 or type_in > 2:
                     print("不存在此选项")
                     input_error_number_of_times_2 += 1
         print("请等待电脑...")
@@ -164,6 +171,10 @@ while 1:
             all_human_result += 1
     # 记录局数
     board_number += 10
+    # 记录运行时间
+    now_run_time = t.time()
+    # 记录时间
+    now_time = t.strftime('%H:%M:%S')
     # 展示在这10局里双方战绩
     print("\n在这10局里:\n")
     print(f"电脑赢了{computer_result}局")
@@ -177,6 +188,10 @@ while 1:
     elif computer_result < human_result:
         print("你和电脑不相上下。\n")
     t.sleep(1)
+    # 变量初始化
+    computer_result = 0
+    human_result = 0
+    input_error_number_of_times_2 = 0
     # 判断用户要不要查看用户和电脑的所有战绩
     while 1:
         if input_error_number_of_times_3 == 2:
@@ -201,19 +216,27 @@ while 1:
             else:
                 print("没有此选项")
                 input_error_number_of_times_3 += 1
-    # 展示双方所有战绩
-    print(f"\n在这{board_number}局里:\n")
-    print(f"电脑赢了{all_computer_result}局")
-    print(f"你赢了{all_human_result}局")
-    print(f"平了{draw}局")
-    # 判断双方胜率高低
-    if all_computer_result > all_human_result:
-        print("电脑胜率比你高。\n")
-    elif all_computer_result < all_human_result:
-        print("你比电脑胜率高。\n")
-    elif all_computer_result < all_human_result:
-        print("你和电脑不相上下。\n")
-    # 变量初始化
-    computer_result = 0
-    human_result = 0
-    input_error_number_of_times_2 = 0
+    if judge_check_total_score == 1:
+        # 展示双方所有战绩
+        print(f"\n在这{board_number}局里:\n")
+        print(f"电脑赢了{all_computer_result}局")
+        print(f"你赢了{all_human_result}局")
+        print(f"平了{draw}局")
+        # 判断双方胜率高低
+        if all_computer_result > all_human_result:
+            print("电脑胜率比你高。\n")
+        elif all_computer_result < all_human_result:
+            print("你比电脑胜率高。\n")
+        elif all_computer_result < all_human_result:
+            print("你和电脑不相上下。\n")
+    # 展示时间
+    print(f"当前时间:{now_time}")
+    # 展示运行时间
+    print(f"游玩时间:{int(int(now_run_time - start_time) / 60)}分", end="")
+    print(f"{int(now_run_time - start_time) % 60}秒")
+    # 监测是否需要提醒休息
+    if 1800 < int(now_run_time - start_time) > 1200:
+        print("游玩时间过长, 建议休息。")
+    elif int(now_run_time - start_time) > 1800:
+        print("游玩时间过长, 游戏将自动关闭。")
+        s.exit(0)
